@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
+
 import argparse
 import datetime
-import requests
+from tools import request_information_in_json_format, format_date
 
 def main():
    args = analyser_commande()
+
+   produire_historique(args.symbole, args.date_debut, args.date_fin, args.valeur)
 
 
 def analyser_commande():
@@ -13,7 +17,7 @@ def analyser_commande():
     parser.add_argument("symbole", nargs="+", help="Nom d'un symbole boursier")
     
     # Optional arguments
-    parser.add_argument("-d", "--début", dest="date_debut", type=str, help="Date recherchée la plus ancienne (format: AAAA-MM-JJ)")
+    parser.add_argument("-d", "--début", dest="date_debut", type=str, default=None, help="Date recherchée la plus ancienne (format: AAAA-MM-JJ)")
     parser.add_argument("-f", "--fin", dest="date_fin", type=str, default=str(datetime.date.today()), help="Date recherchée la plus récente (format: AAAA-MM-JJ)")
     parser.add_argument("-v", "--valeur", dest="valeur", choices=["fermeture", "ouverture", "min", "max", "volume"], default="fermeture", help="La valeur désirée (par défaut: fermeture)")
 
@@ -22,17 +26,30 @@ def analyser_commande():
     # Default value of date_debut
     args.date_debut = args.date_debut if args.date_debut is not None else args.date_fin
 
-    return parser.parse_args()
-
-def format_date(date):
-    date_block = date.split("-")
-    return f"datetime.date({date_block[0]}, {date_block[1]}, {date_block[2]})"
+    return args
 
 
-def produire_historique(symbole, date_debut, date_fin, valeur_desiree):
-    # first line
-    print(f"titre={symbole}: valeur={valeur_desiree}, début={format_date(date_debut)}, fin={format_date(date_fin)}")
-    
+def produire_historique(symboles, date_debut, date_fin, valeur):
+    # For each symbole
+    for symbole in symboles:
+        # creation of the request
+        url = f'https://pax.ulaval.ca/action/{symbole}/historique/'
+        params = {'début': date_debut, 'fin': date_fin}
+
+        # getting data in json format
+        data = request_information_in_json_format(url=url, params=params)
+
+        # process on data
+        final_data = []
+        for date in data["historique"].keys():
+            final_data.append((format_date(date), data["historique"][date][valeur]))
+        
+        # displaying informations
+        # ----- First line
+        print(f"titre={symbole}: valeur={valeur}, début={format_date(date_debut)}, fin={format_date(date_fin)}")
+        # ----- Data
+        print(final_data)
+
 
 
 if __name__ == "__main__":
