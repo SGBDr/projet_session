@@ -22,11 +22,14 @@ def analyser_commande():
     # Positional arguments
     parser.add_argument("symbole", nargs="+", help="Nom d'un symbole boursier")
     # Optional arguments
+
     parser.add_argument("-d", "--début", dest="date_debut", type=str, default=None, 
                         help="Date recherchée la plus ancienne (format: AAAA-MM-JJ)")
+    
     parser.add_argument("-f", "--fin", dest="date_fin", type=str, 
                         default=str(datetime.date.today()), 
                         help="Date recherchée la plus récente (format: AAAA-MM-JJ)")
+    
     parser.add_argument("-v", "--valeur", dest="valeur", 
                         choices=["fermeture", "ouverture", "min", "max", "volume"], 
                         default="fermeture", help="La valeur désirée (par défaut: fermeture)")
@@ -57,9 +60,9 @@ def produire_historique(symboles, date_debut, date_fin, valeur):
             final_data.append((format_date(date), data["historique"][date][valeur]))
         
         # displaying informations
-        # ----- First line
-        print(f"titre={symbole}: valeur={valeur}, début={format_date(date_debut)}, fin={format_date(date_fin)}")
-        # ----- Data
+        print(f"titre={symbole}: valeur={valeur}, début={format_date(date_debut)}, 
+              fin={format_date(date_fin)}")
+        
         print(final_data)
 
 
