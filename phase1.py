@@ -60,8 +60,9 @@ def produire_historique(symboles, date_debut, date_fin, valeur):
             final_data.append((format_date(date), data["historique"][date][valeur]))
         
         # displaying informations
-        print(f"titre={symbole}: valeur={valeur}, début={format_date(date_debut)}, 
-              fin={format_date(date_fin)}")
+        print(
+            f"titre={symbole}: valeur={valeur}, début={format_date(date_debut)}, fin={format_date(date_fin)}"
+            )
         
         print(final_data)
 
