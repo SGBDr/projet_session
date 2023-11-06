@@ -51,6 +51,5 @@ def produire_historique(symboles, date_debut, date_fin, valeur):
         print(final_data)
 
 
-
 if __name__ == "__main__":
     main()
