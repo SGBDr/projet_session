@@ -2,6 +2,10 @@ import argparse
 import datetime
 
 def main():
+   args = analyser_commande()
+
+
+def analyser_commande():
     parser = argparse.ArgumentParser(description="Extraction de valeurs historiques pour un ou plusieurs symboles boursiers.")
     
     # Positional arguments
@@ -14,17 +18,12 @@ def main():
 
     args = parser.parse_args()
 
-    # Programme logic with params
-    symboles = args.symbole
-    date_debut = args.date_debut if args.date_debut is not None else args.date_fin
-    date_fin = args.date_fin
-    valeur = args.valeur
+    # Default value of date_debut
+    args.date_debut = args.date_debut if args.date_debut is not None else args.date_fin
 
-    # debuging code
-    print("Symboles boursiers :", symboles)
-    print("Date de début :", date_debut)
-    print("Date de fin :", date_fin)
-    print("Valeur désirée :", valeur)
+    return parser.parse_args()
+
+
 
 if __name__ == "__main__":
     main()
