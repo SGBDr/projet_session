@@ -1,5 +1,6 @@
 import argparse
 import datetime
+import requests
 
 def main():
    args = analyser_commande()
@@ -23,6 +24,15 @@ def analyser_commande():
 
     return parser.parse_args()
 
+def format_date(date):
+    date_block = date.split("-")
+    return f"datetime.date({date_block[0]}, {date_block[1]}, {date_block[2]})"
+
+
+def produire_historique(symbole, date_debut, date_fin, valeur_desiree):
+    # first line
+    print(f"titre={symbole}: valeur={valeur_desiree}, début={format_date(date_debut)}, fin={format_date(date_fin)}")
+    
 
 
 if __name__ == "__main__":
