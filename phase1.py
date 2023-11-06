@@ -17,15 +17,18 @@ def analyser_commande():
     """
     Analyse the command line, config all args and return this appropriation value tu the caller
     """
-    parser = argparse.ArgumentParser(description="Extraction de valeurs historiques pour un ou plusieurs symboles boursiers.")
+    parser = argparse.ArgumentParser(
+        description="Extraction de valeurs historiques pour un ou plusieurs symboles boursiers.")
     # Positional arguments
     parser.add_argument("symbole", nargs="+", help="Nom d'un symbole boursier")
     # Optional arguments
     parser.add_argument("-d", "--début", dest="date_debut", type=str, default=None, 
                         help="Date recherchée la plus ancienne (format: AAAA-MM-JJ)")
-    parser.add_argument("-f", "--fin", dest="date_fin", type=str, default=str(datetime.date.today()), 
+    parser.add_argument("-f", "--fin", dest="date_fin", type=str, 
+                        default=str(datetime.date.today()), 
                         help="Date recherchée la plus récente (format: AAAA-MM-JJ)")
-    parser.add_argument("-v", "--valeur", dest="valeur", choices=["fermeture", "ouverture", "min", "max", "volume"], 
+    parser.add_argument("-v", "--valeur", dest="valeur", 
+                        choices=["fermeture", "ouverture", "min", "max", "volume"], 
                         default="fermeture", help="La valeur désirée (par défaut: fermeture)")
     args = parser.parse_args()
     # Default value of date_debut
