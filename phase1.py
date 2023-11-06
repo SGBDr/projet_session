@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+Phase 1 du projet de session
+"""
 
 import argparse
 import datetime
@@ -23,15 +26,15 @@ def analyser_commande():
     parser.add_argument("symbole", nargs="+", help="Nom d'un symbole boursier")
     # Optional arguments
 
-    parser.add_argument("-d", "--début", dest="date_debut", type=str, default=None, 
+    parser.add_argument("-d", "--début", dest="date_debut", type=str, default=None,
                         help="Date recherchée la plus ancienne (format: AAAA-MM-JJ)")
     
-    parser.add_argument("-f", "--fin", dest="date_fin", type=str, 
-                        default=str(datetime.date.today()), 
+    parser.add_argument("-f", "--fin", dest="date_fin", type=str,
+                        default=str(datetime.date.today()),
                         help="Date recherchée la plus récente (format: AAAA-MM-JJ)")
     
-    parser.add_argument("-v", "--valeur", dest="valeur", 
-                        choices=["fermeture", "ouverture", "min", "max", "volume"], 
+    parser.add_argument("-v", "--valeur", dest="valeur",
+                        choices=["fermeture", "ouverture", "min", "max", "volume"],
                         default="fermeture", help="La valeur désirée (par défaut: fermeture)")
     args = parser.parse_args()
     # Default value of date_debut
@@ -61,8 +64,9 @@ def produire_historique(symboles, date_debut, date_fin, valeur):
         
         # displaying informations
         print(
-            f"titre={symbole}: valeur={valeur}, début={format_date(date_debut)}, fin={format_date(date_fin)}"
-            )
+            f"titre={symbole}: valeur={valeur}, début={format_date(date_debut)}" +
+            f", fin={format_date(date_fin)}"
+        )
         
         print(final_data)
 
