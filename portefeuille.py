@@ -6,7 +6,6 @@ Portefeuille implamentaion : phase 2
 import datetime
 
 from exceptions import ErreurDate, LiquiditeInsuffisante, ErreurQuantite
-from marche_boursier import Bourse
 
 class Portefeuille:
     """
