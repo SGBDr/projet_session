@@ -5,7 +5,7 @@ This module contain all utils fonction like requesting server or parsing date
 import json
 import requests
 
-url = "https://pax.ulaval.ca/action/"
+URL = "https://pax.ulaval.ca/action/"
 
 def format_date(date):
     """
@@ -39,7 +39,7 @@ def request_historique_in_json_format(symbole, params):
     return to json format
     """
     # creation of url
-    temp_url = f'{url}{symbole}/historique/'
+    temp_url = f'{URL}{symbole}/historique/'
     rps = requests.get(url=temp_url, params=params)
 
     return json.loads(rps.text["historique"])

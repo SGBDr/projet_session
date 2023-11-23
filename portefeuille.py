@@ -6,9 +6,12 @@ Portefeuille implamentaion : phase 2
 import datetime
 
 from exceptions import ErreurDate, LiquiditeInsuffisante, ErreurQuantite
-from bourse import Bourse
+from marche_boursier import Bourse
 
 class Portefeuille:
+    """
+    Porte feuille implementation
+    """
     def __init__(self, bourse):
         """
         Class constructor
@@ -97,21 +100,6 @@ class Portefeuille:
         # Add the revenue to the liquidity
         self.liquidite += recette_totale
 
-        # Update the portfolio by deducting the sold quantity
-        """
-        for position in self.positions:
-            if position['symbole'] == symbole:
-                position['quantite'] -= quantite
-                if position['quantite'] < 0:
-                    quantite = -position['quantite']
-                    self.positions.remove(position)
-                else:
-                    quantite = 0
-                    break
-                if quantite == 0:
-                    break
-        """
-
         self.positions.append({
                 'symbole': symbole, 
                 'quantite': quantite, 
@@ -145,7 +133,7 @@ class Portefeuille:
         for symbole in symboles:
             prix_actuel += self.bourse.prix(symbole, date)
         return prix_actuel
-    
+
     def titres(self, date = datetime.date.today()):
         """
         Get the dictionary of symbols and quantities of all stocks 

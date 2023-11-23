@@ -24,8 +24,8 @@ class Bourse:
             raise ErreurDate("La date spécifiée est postérieure à la date du jour.")
 
         # Get historique list
-        historique = request_historique_in_json_format(symbole=symbole)
-        
+        params = {'début': date, 'fin': date}
+        historique = request_historique_in_json_format(symbole=symbole, params=params)
 
         # Search the first close value before the specify date
         for string_date in historique.keys():
