@@ -37,9 +37,11 @@ class Portefeuille:
         # verify condition for admisible date
         if date > datetime.date.today():
             raise ErreurDate() 
+        
         amount = 0
         for deposite in self.deposits:
             amount += deposite["amount"] if deposite["date"] <= date else 0
+            
         return amount
     
     def acheter(self, symbole, quantite, date_achat = datetime.date.today()):
