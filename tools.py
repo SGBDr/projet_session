@@ -2,9 +2,10 @@
 This module contain all utils fonction like requesting server or parsing date
 """
 
+import datetime
+
 import json
 import requests
-import datetime
 
 URL = "https://pax.ulaval.ca/action/"
 
