@@ -6,9 +6,12 @@ Bourse implamentaion : phase 2
 import datetime
 
 from exceptions import ErreurDate
-from tools import request_information_in_json_format, get_date_from_string
+from tools import request_historique_in_json_format, get_date_from_string
 
 class Bourse:
+    """
+    Bourse implementation
+    """
 
     def prix(self, symbole, date):
         """
@@ -21,7 +24,7 @@ class Bourse:
             raise ErreurDate("La date spécifiée est postérieure à la date du jour.")
 
         # Get historique list
-        historique = request_information_in_json_format(symbole=symbole)
+        historique = request_historique_in_json_format(symbole=symbole)
         
 
         # Search the first close value before the specify date
@@ -36,3 +39,4 @@ class Bourse:
 
         # If historique is empty
         return 0.0
+    

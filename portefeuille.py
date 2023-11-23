@@ -38,6 +38,7 @@ class Portefeuille:
         if date > datetime.date.today():
             raise ErreurDate()
         
+        
         amount = 0
         for deposite in self.deposits:
             amount += deposite["amount"] if deposite["date"] <= date else 0
