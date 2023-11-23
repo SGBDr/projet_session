@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Phase 2 du projet de session
+Bourse implamentaion : phase 2
 """
 
 import datetime
 
-from exception.ErreurDate import ErreurDate
+from exceptions import ErreurDate
 from tools import request_information_in_json_format, get_date_from_string
 
 class Bourse:
