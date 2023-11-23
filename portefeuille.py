@@ -36,14 +36,14 @@ class Portefeuille:
         """
         # verify condition for admisible date
         if date > datetime.date.today():
-            raise ErreurDate() 
-        
+            raise ErreurDate()
+
         amount = 0
         for deposite in self.deposits:
             amount += deposite["amount"] if deposite["date"] <= date else 0
-            
+
         return amount
-    
+
     def acheter(self, symbole, quantite, date_achat = datetime.date.today()):
         """
         Buy stocks
@@ -78,7 +78,7 @@ class Portefeuille:
         if date_vente > datetime.date.today():
             raise ErreurDate()
 
-        # Verify if the portfolio has enough quantity of the specified stock 
+        # Verify if the portfolio has enough quantity of the specified stock
         # for the sale
         quantite_disponible = 0
         for position in self.positions:
@@ -133,7 +133,7 @@ class Portefeuille:
             total_value += position['quantite'] * prix_actuel
 
         return total_value
-    
+
     def valeur_des_titres(self, symboles, date = datetime.date.today()):
         """
         Get the total value of specified stocks at a specific date
@@ -173,7 +173,7 @@ class Portefeuille:
                 temp_titre.append({"symbole" : symbole, "quantite" : quantite})
 
         return titres_dict
-    
+
     def valeur_projetee(self, date, rendement):
         """
         Get the projected value of the portfolio at a future date with specified annual returns
@@ -207,13 +207,7 @@ class Portefeuille:
             day_m = (datetime.date.today() - date).days % 365
 
             # Calculate the projected value for the position
-            projected_value += (quantite * prix * (1 + rendement_symbole / 100) ** year_n) 
+            projected_value += (quantite * prix * (1 + rendement_symbole / 100) ** year_n)
             projected_value += day_m * quantite * prix * rendement_symbole / 36500
 
         return projected_value
-    
-    
-
-    
-
-    
