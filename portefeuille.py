@@ -198,4 +198,3 @@ class Portefeuille:
             projected_value += day_m * quantite * prix * rendement_symbole / 36500
 
         return projected_value
-
