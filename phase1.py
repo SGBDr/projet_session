@@ -5,7 +5,7 @@ Phase 1 du projet de session
 
 import argparse
 import datetime
-from tools import request_information_in_json_format, format_date
+from tools import request_historique_in_json_format, format_date
 
 
 def main():
@@ -48,16 +48,15 @@ def produire_historique(symboles, date_debut, date_fin, valeur):
     """
     # For each symbole
     for symbole in symboles:
-        # creation of the request
-        url = f'https://pax.ulaval.ca/action/{symbole}/historique/'
+        # creation of request param
         params = {'début': date_debut, 'fin': date_fin}
 
         # getting data in json format
-        data = request_information_in_json_format(url=url, params=params)
+        data = request_historique_in_json_format(symbole=symbole, params=params)
 
         # process on data
         final_data = []
-        for date in data["historique"].keys():
+        for date in data.keys():
             final_data.append((format_date(date), data["historique"][date][valeur]))
         # displaying informations
         print(

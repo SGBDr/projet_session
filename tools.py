@@ -5,21 +5,41 @@ This module contain all utils fonction like requesting server or parsing date
 import json
 import requests
 
+url = "https://pax.ulaval.ca/action/"
 
 def format_date(date):
     """
     Formating date to format requeste : datetime.date(xxx, xx, xx)
     """
-    date_block = date.split("-")
+    year, mouth, day = split_string_date_in_component(date)
 
-    return f"datetime.date({date_block[0]}, {date_block[1]}, {date_block[2]})"
+    return f"datetime.date({year}, {mouth}, {day})"
 
 
-def request_information_in_json_format(url, params):
+def split_string_date_in_component(date):
+    """
+    From string, return int component (year, mouth, day)
+    """
+
+    return date.split("-")
+
+
+def get_date_from_string(date):
+    """
+    From string goes to date
+    """
+    year, mouth, day = map(int, split_string_date_in_component(date))
+
+    return date(year, mouth, day)
+
+
+def request_historique_in_json_format(symbole, params):
     """
     Resuest data to the server with url and params
     return to json format
     """
-    rps = requests.get(url=url, params=params)
+    # creation of url
+    temp_url = f'{url}{symbole}/historique/'
+    rps = requests.get(url=temp_url, params=params)
 
-    return json.loads(rps.text)
+    return json.loads(rps.text["historique"])

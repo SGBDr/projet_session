@@ -1,0 +1,3 @@
+
+class ErreurDate(Exception):
+    pass
