@@ -36,13 +36,10 @@ class Portefeuille:
         """
         # verify condition for admisible date
         if date > datetime.date.today():
-            raise ErreurDate()
-        
-        
+            raise ErreurDate() 
         amount = 0
         for deposite in self.deposits:
             amount += deposite["amount"] if deposite["date"] <= date else 0
-
         return amount
     
     def acheter(self, symbole, quantite, date_achat = datetime.date.today()):
@@ -60,7 +57,6 @@ class Portefeuille:
         # Verify if the portfolio has enough liquidity for the purchase
         if cout_total > self.solde(date_achat):
             raise LiquiditeInsuffisante()
-
         self.liquidite -= cout_total
 
         # Add the purchase to the portfolio
@@ -129,9 +125,7 @@ class Portefeuille:
         # Verify the condition for an admissible date
         if date > datetime.date.today():
             raise ErreurDate()
-
         total_value = 0
-
         for position in self.positions:
             prix_actuel = self.bourse.prix(position['symbole'], date)
             total_value += position['quantite'] * prix_actuel
@@ -145,12 +139,9 @@ class Portefeuille:
         # Verify the condition for an admissible date
         if date > datetime.date.today():
             raise ErreurDate()
-
         prix_actuel = 0
-
         for symbole in symboles:
             prix_actuel += self.bourse.prix(symbole, date)
-
         return prix_actuel
     
     def titres(self, date = datetime.date.today()):
