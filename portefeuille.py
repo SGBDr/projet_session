@@ -166,14 +166,14 @@ class Portefeuille:
         Get the projected value of the portfolio at a future date with specified annual returns
         """
         # Verify the condition for an admissible date
-        if date < self.bourse.date_aujourdhui():
+        if date < datetime.date.today():
             raise ErreurDate()
 
         # Initialize the projected value with the current total value of the portfolio
         projected_value = self.valeur_totale()
 
         # Calculate the projected value based on the specified annual returns
-        for position in self.titres(date = date):
+        for position in self.titres(date = datetime.date.today()):
             symbole = position['symbole']
             quantite = position['quantite']
 
@@ -190,11 +190,12 @@ class Portefeuille:
             # Get the stock price at the projection date
             prix = self.bourse.prix(symbole, datetime.date.today())
 
-            year_n = int((datetime.date.today() - date).days / 365)
-            day_m = (datetime.date.today() - date).days % 365
+            year_n = int((date - datetime.date.today()).days / 365)
+            day_m = (date - datetime.date.today()).days % 365
 
             # Calculate the projected value for the position
             projected_value += (quantite * prix * (1 + rendement_symbole / 100) ** year_n)
             projected_value += day_m * quantite * prix * rendement_symbole / 36500
 
         return projected_value
+

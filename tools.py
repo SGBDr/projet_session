@@ -4,6 +4,7 @@ This module contain all utils fonction like requesting server or parsing date
 
 import json
 import requests
+import datetime
 
 URL = "https://pax.ulaval.ca/action/"
 
@@ -30,7 +31,7 @@ def get_date_from_string(date):
     """
     year, mouth, day = map(int, split_string_date_in_component(date))
 
-    return date(year, mouth, day)
+    return datetime.date(year, mouth, day)
 
 
 def request_historique_in_json_format(symbole, params):
@@ -42,4 +43,4 @@ def request_historique_in_json_format(symbole, params):
     temp_url = f'{URL}{symbole}/historique/'
     rps = requests.get(url=temp_url, params=params)
 
-    return json.loads(rps.text["historique"])
+    return json.loads(rps.text)["historique"]
