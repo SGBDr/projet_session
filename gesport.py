@@ -20,11 +20,11 @@ def analyser_commande():
                         choices=['deposer', 'acheter', 'vendre', 'lister', 'projeter'],
                         help='Action à effectuer')
     parser.add_argument('-d', 
-                        '--date', dest="date"
+                        '--date', dest="date",
                         default=str(datetime.date.today()), 
                         help='Date effective (par défaut, date du jour)')
     parser.add_argument('-q',
-                        '--quantité', dest="quantite"
+                        '--quantité', dest="quantite",
                         type=int, default=1,
                         help='Quantité désirée (par défaut: 1)')
     parser.add_argument('-t',
@@ -60,17 +60,33 @@ def main():
 
     # Perform the specified action
     if args.action == 'deposer':
-        portefeuille.deposits(amount=args.quantite, date=args.date)
+        # Implement the logic for deposer action
+        portefeuille.déposer(amount=args.quantite, date=args.date)
         print(f'solde = {portefeuille.solde()}')
     elif args.action == 'acheter':
         # Implement the logic for acheter action
-        pass
+        for symbole in args.titres:
+            portefeuille.acheter(symbole=symbole, date_achat=args.date, quantite=args.quantite)
+        print(f'solde = {portefeuille.solde()}')
     elif args.action == 'vendre':
         # Implement the logic for vendre action
-        pass
+        for symbole in args.titres:
+            portefeuille.vendre(symbole=symbole, date_vente=args.date, quantite=args.quantite)
+        print(f'solde = {portefeuille.solde()}')
     elif args.action == 'lister':
         # Implement the logic for lister action
-        pass
+        all_titres = portefeuille.titres(date=args.date)
+        titres = []
+        for element in args.titres:
+            if element in all_titres:
+                titres.append(element)
+
+        for symbole in titres.keys():
+            quantite = titres[symbole]
+            prix_actuel = portefeuille.valeur_des_titres(symboles=[symbole], date=args.date)
+
+            print(f'{symbole} = {quantite} x {prix_actuel} = {quantite * prix_actuel}')
     elif args.action == 'projeter':
         # Implement the logic for projeter action
-        pass
+
+        print(f'valeur projetée = {quantite}')
