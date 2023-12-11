@@ -3,22 +3,57 @@
 Portefeuille implamentaion : phase 2
 """
 
+import json
 import datetime
-
 from exceptions import ErreurDate, LiquiditeInsuffisante, ErreurQuantite
 
+
 class Portefeuille:
-    """
-    Porte feuille implementation
-    """
-    def __init__(self, bourse):
+    def __init__(self, bourse, nom_portefeuille):
         """
-        Class constructor
+        Initialization
         """
         self.bourse = bourse
         self.liquidite = 0
         self.deposits = []
         self.positions = []
+        self.nom_portefeuille = nom_portefeuille
+
+        # Load existing data from JSON file
+        self.lire_json()
+
+    def __del__(self):
+        """
+        Destructor: called when the instance is about to be destroyed
+        """
+        self.écrire_json()
+
+    def lire_json(self):
+        """
+        Load the current state to a JSON file
+        """
+        try:
+            with open(f"portefeuilles/{self.nom_portefeuille}.json", 'r') as file:
+                data = json.load(file)
+                self.liquidite = data.get('liquidite', 0)
+                self.deposits = data.get('deposits', [])
+                self.positions = data.get('positions', [])
+        except FileNotFoundError:
+            # File doesn't exist, use default values
+            self.écrire_json()
+
+    def écrire_json(self):
+        """
+        Save the current state to a JSON file
+        """
+        data = {
+            'liquidite': self.liquidite,
+            'deposits': self.deposits,
+            'positions': self.positions
+        }
+
+        with open(f"portefeuilles/{self.nom_portefeuille}.json", 'w') as file:
+            json.dump(data, file, indent=2)
 
     def déposer(self, amount, date = datetime.date.today()):
         """
