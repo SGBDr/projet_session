@@ -89,4 +89,4 @@ def main():
     elif args.action == 'projeter':
         # Implement the logic for projeter action
 
-        print(f'valeur projetée = {quantite}')
+        print(f'valeur projetée = {0}')
