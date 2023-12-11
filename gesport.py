@@ -33,19 +33,19 @@ def analyser_commande():
                         default=[],
                         help='Le ou les titres à considérer')
     parser.add_argument('-r',
-                        '--rendement', dest="rendement"
+                        '--rendement', dest="rendement",
                         type=float,
                         default=0,
                         help='Rendement annuel global (par défaut, 0)')
     parser.add_argument('-v',
-                        '--volatilité', dest="volatilite"
+                        '--volatilité', dest="volatilite",
                         type=float, default=0,
                         help='Indice de volatilité global sur le rendement annuel (par défaut, 0)')
-    parser.add_argument('-g', '--graphique', dest="graphique"
+    parser.add_argument('-g', '--graphique', dest="graphique",
                         type=bool, default=False,
                         help='Affichage graphique (par défaut, pas d\'affichage graphique)')
     parser.add_argument('-p', '--portefeuille',
-                        default='folio', dest="portefeuille"
+                        default='folio', dest="portefeuille",
                         help='Nom de portefeuille (par défaut, utiliser folio)')
 
     args = parser.parse_args()
