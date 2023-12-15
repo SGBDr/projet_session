@@ -5,7 +5,6 @@ Phase 3 du projet de session
 
 import argparse
 import datetime
-from phase1 import analyser_commande
 from portefeuille import Portefeuille
 from bourse import Bourse
 
