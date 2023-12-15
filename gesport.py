@@ -7,7 +7,7 @@ import argparse
 import datetime
 from phase1 import analyser_commande
 from portefeuille import Portefeuille
-from marche_boursier import Bourse
+from bourse import Bourse
 
 
 def analyser_commande():
@@ -19,9 +19,9 @@ def analyser_commande():
     parser.add_argument('action', dest="action",
                         choices=['deposer', 'acheter', 'vendre', 'lister', 'projeter'],
                         help='Action à effectuer')
-    parser.add_argument('-d', 
+    parser.add_argument('-d',
                         '--date', dest="date",
-                        default=str(datetime.date.today()), 
+                        default=str(datetime.date.today()),
                         help='Date effective (par défaut, date du jour)')
     parser.add_argument('-q',
                         '--quantité', dest="quantite",
@@ -84,8 +84,8 @@ def main():
             if element in all_titres:
                 titres.append(element)
 
-        for symbole in titres.keys():
-            quantite = titres[symbole]
+        for symbole in titres:
+            quantite = all_titres[symbole]
             prix_actuel = portefeuille.valeur_des_titres(symboles=[symbole], date=args.date)
 
             print(f'{symbole} = {quantite} x {prix_actuel} = {quantite * prix_actuel}')

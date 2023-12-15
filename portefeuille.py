@@ -9,6 +9,10 @@ from exceptions import ErreurDate, LiquiditeInsuffisante, ErreurQuantite
 
 
 class Portefeuille:
+    """
+        PorteFeuille Class, allow portefeuille gestion
+    """
+
     def __init__(self, bourse, nom_portefeuille):
         """
         Initialization
@@ -33,7 +37,7 @@ class Portefeuille:
         Load the current state to a JSON file
         """
         try:
-            with open(f"portefeuilles/{self.nom_portefeuille}.json", 'r') as file:
+            with open(f"portefeuilles/{self.nom_portefeuille}.json", 'r', encoding='utf-8') as file:
                 data = json.load(file)
                 self.liquidite = data.get('liquidite', 0)
                 self.deposits = data.get('deposits', [])
@@ -52,7 +56,7 @@ class Portefeuille:
             'positions': self.positions
         }
 
-        with open(f"portefeuilles/{self.nom_portefeuille}.json", 'w') as file:
+        with open(f"portefeuilles/{self.nom_portefeuille}.json", 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=2)
 
     def déposer(self, amount, date = datetime.date.today()):
