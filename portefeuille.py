@@ -188,7 +188,6 @@ class Portefeuille:
         for position in self.positions:
             symbole = position['symbole']
             quantite = position['quantite']
-            
 
             if symbole in titres_dict:
                 titres_dict[symbole] += quantite
