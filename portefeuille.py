@@ -124,8 +124,9 @@ class Portefeuille:
         # for the sale
         quantite_disponible = 0
         for position in self.positions:
-            if position['symbole'] == symbole and get_date_from_format(position["date"]) <= date_vente:
-                quantite_disponible += position['quantite']
+            if position['symbole'] == symbole :
+                if get_date_from_format(position["date"]) <= date_vente:
+                    quantite_disponible += position['quantite']
 
         if quantite > quantite_disponible:
             raise ErreurQuantite()
