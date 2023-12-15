@@ -53,6 +53,9 @@ def analyser_commande():
 
 
 def main():
+    """
+        main
+    """
     args = analyser_commande()
 
     # Initialize Bourse and Portefeuille instances
