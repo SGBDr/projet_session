@@ -7,6 +7,7 @@ import argparse
 import datetime
 from portefeuille import Portefeuille
 from bourse import Bourse
+from tools import get_date_from_string
 
 
 def analyser_commande():
@@ -15,8 +16,8 @@ def analyser_commande():
     """
     parser = argparse.ArgumentParser(description="Gestionnaire de portefeuille d'actions")
 
-    parser.add_argument('action', dest="action",
-                        choices=['deposer', 'acheter', 'vendre', 'lister', 'projeter'],
+    parser.add_argument('action',
+                        choices=['déposer', 'acheter', 'vendre', 'lister', 'projeter'],
                         help='Action à effectuer')
     parser.add_argument('-d',
                         '--date', dest="date",
@@ -48,6 +49,7 @@ def analyser_commande():
                         help='Nom de portefeuille (par défaut, utiliser folio)')
 
     args = parser.parse_args()
+    args.date = get_date_from_string(args.date)
     return args
 
 
@@ -61,7 +63,7 @@ def main():
     portefeuille = Portefeuille(nom_portefeuille=args.portefeuille, bourse=Bourse())
 
     # Perform the specified action
-    if args.action == 'deposer':
+    if args.action == 'déposer':
         # Implement the logic for deposer action
         portefeuille.déposer(amount=args.quantite, date=args.date)
         print(f'solde = {portefeuille.solde()}')
@@ -92,3 +94,5 @@ def main():
         # Implement the logic for projeter action
 
         print(f'valeur projetée = {0}')
+
+main()

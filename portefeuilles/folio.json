@@ -1,0 +1,35 @@
+{
+  "liquidite": 29748.21,
+  "deposits": [
+    {
+      "date": "datetime.date(2023, 11, 01)",
+      "amount": 10000
+    },
+    {
+      "date": "datetime.date(2023, 11, 01)",
+      "amount": 10000
+    },
+    {
+      "date": "datetime.date(2023, 11, 02)",
+      "amount": -642.9000000000001
+    },
+    {
+      "date": "datetime.date(2023, 11, 03)",
+      "amount": 391.11
+    }
+  ],
+  "positions": [
+    {
+      "symbole": "goog",
+      "quantite": 5,
+      "prix": 128.58,
+      "date": "datetime.date(2023, 11, 02)"
+    },
+    {
+      "symbole": "goog",
+      "quantite": 3,
+      "prix": 130.37,
+      "date": "datetime.date(2023, 11, 03)"
+    }
+  ]
+}

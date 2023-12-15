@@ -18,6 +18,22 @@ def format_date(date):
     return f"datetime.date({year}, {mouth}, {day})"
 
 
+def split_format_date_in_component(date):
+    """
+    return date from 
+    """
+    return date.split("datetime.date(")[1].split(")")[0].split(", ")
+
+
+def get_date_from_format(date):
+    """
+    From format string goes to date
+    """
+    year, mouth, day = map(int, split_format_date_in_component(date))
+
+    return datetime.date(year, mouth, day)
+
+
 def split_string_date_in_component(date):
     """
     From string, return int component (year, mouth, day)
